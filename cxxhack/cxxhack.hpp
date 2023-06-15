@@ -180,10 +180,15 @@ struct Waitset : Entity {
   }
 };
 
-Participant create_participant(uint32_t domainid = DDS_DOMAIN_DEFAULT, const std::optional<Qos>& qos = std::nullopt);
-Publisher create_publisher(Participant dp, const std::optional<Qos>& qos);
-Subscriber create_subscriber(Participant dp, const std::optional<Qos>& qos);
-
+inline Participant create_participant(uint32_t domainid = DDS_DOMAIN_DEFAULT, const std::optional<Qos>& qos = std::nullopt) {
+  return Participant(domainid, qos);
+}
+inline Publisher create_publisher(Participant dp, const std::optional<Qos>& qos) {
+  return Publisher(dp, qos);
+}
+inline Subscriber create_subscriber(Participant dp, const std::optional<Qos>& qos) {
+  return Subscriber(dp, qos);
+}
 template<typename T>
 Topic<T> create_topic(Participant pp, const std::string& name, const std::optional<Qos>& qos = std::nullopt) {
   return Topic<T>(pp, name, qos);

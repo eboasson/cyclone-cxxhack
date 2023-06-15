@@ -1,0 +1,5 @@
+@appendable @topic
+struct TestType {
+  @key string k;
+  sequence<boolean> bs;
+};
